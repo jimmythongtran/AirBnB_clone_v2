@@ -11,6 +11,8 @@ The project is currently in its first phase, where we are creating a command lin
 **Authors**
 - **Philip Yoo**, \<philip.yoo@holbertonschool.com>, @philipYoo10
 - **Jianqin Wang**, \<jianqin.wang@holbertonschool.com>, @jianqinwang94
+- **Jimmy Thong Tran**, \<jimmy.tran@holbertonschool.com>, @jimmythongtran
+- **Ian C.**, \<dcianberlin@gmail.com>, @Incitatous
 
 ----------------------------------------
 
