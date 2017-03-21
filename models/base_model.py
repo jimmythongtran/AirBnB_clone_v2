@@ -14,8 +14,9 @@ class BaseModel:
         else:
             self.created_at = datetime.datetime.now()
             self.id = str(uuid.uuid4())
-        for k in kwargs:
-            print("kwargs: {}: {}".format(k, kwargs[k]))
+        if kwargs:
+            for k, v in kwargs.items():
+                setattr(self, k, v)
 
     def save(self):
         """method to update self"""

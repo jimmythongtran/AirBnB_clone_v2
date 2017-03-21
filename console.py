@@ -25,14 +25,30 @@ class HBNBCommand(cmd.Cmd):
     def do_create(self, args):
         """Create a new Basemodel"""
         args = args.split()
-        if len(args) != 1:
-            print("** clas name missing **")
+        myDict = {}
+        if len(args) < 1:
+            print("** class name missing **")
         else:
-            if len(args) > 0 and args[0] in HBNBCommand.valid_classes:
-                new_obj = eval(args[0])()
+            if args[0] in HBNBCommand.valid_classes:
+                if len(args) == 1:
+                    new_obj = eval(args[0])()
+                else:
+                    for i in args[1:]:
+                        temp = i.split("=")
+                        if temp[1][0] == '"' and temp[1][-1] == '"':
+                            if "_" in temp[1]:
+                                temp[1] = temp[1].replace("_", " ")
+                            temp[1] = temp[1][1:-1]
+                        elif "." in temp[1]:
+                            temp[1] = float(temp[1])
+                        else:
+                            temp[1] = int(temp[1])
+                        myDict[temp[0]] = temp[1]
+                    new_obj = eval(args[0])(**myDict)
                 print(new_obj.id)
                 new_obj.save()
             else:
+                """ADD AN ERROR MESSAGE"""
                 return
 
     def do_show(self, args):
