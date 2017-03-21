@@ -2,7 +2,9 @@
 import datetime
 import uuid
 import models
+from sqlalchemy.ext.declarative import declarative_base
 
+base = declarative_base()
 
 class BaseModel:
     """The base class for all storage objects in this project"""
