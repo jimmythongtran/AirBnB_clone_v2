@@ -2,15 +2,10 @@
 import datetime
 import uuid
 import models
-from sqlalchemy import Column, String
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-
-engine = create_engine('mysql+mysqldb://{}:{}@localhost:3306/{}'.format(
-    sys.argv[1], sys.argv[2], sys.argv[3]))
 
 base = declarative_base()
+
 
 class BaseModel:
     """The base class for all storage objects in this project"""
@@ -26,23 +21,11 @@ class BaseModel:
             for k, v in kwargs.items():
                 setattr(self, k, v)
 
-    def id(self):
-        id = Column(String(60), nullable=False, primary_key=True)
-
-    def created_at(self):
-        created_at = Column(datetime, nullable=False, datetime.datetime.now())
-
-    def updated_at(self):
-        updated_at = Column(datetime, nullable=False, datetime.datetime.now())
-    
     def save(self):
         """method to update self"""
         self.updated_at = datetime.datetime.now()
         models.storage.new(self)
         models.storage.save()
-
-    def delete(self):
-        models.storage.delete(self)
 
     def __str__(self):
         """edit string representation"""
