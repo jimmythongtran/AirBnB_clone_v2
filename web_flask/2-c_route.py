@@ -15,6 +15,7 @@ def HBNB():
 
 @app.route('/c/<text>')
 def C(text):
+    text = text.replace('_', ' ')
     return "c %s" % text
 
 if __name__ == '__main__':
