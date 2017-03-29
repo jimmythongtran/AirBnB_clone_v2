@@ -15,13 +15,15 @@ def HBNB():
 
 @app.route('/c/<text>')
 def C(text):
-    return "c %s" % text
+    text = text.replace('_', ' ')
+    return "C %s" % text
 
 
 @app.route('/python/')
 @app.route('/python/<text>')
 def python(text="is cool"):
-    return "python %s" % text
+    text = text.replace('_', ' ')
+    return "Python %s" % text
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
