@@ -33,10 +33,10 @@ class DBStorage:
         if cls is None:
             for i in queries:
                 for info in self.__session.query(i):
-                    queriesDict[data.__dict__["id"]] = info
+                    queriesDict[info.__dict__["id"]] = info
         else:
-            for info in self.__session(eval(cls)):
-                queriesDict[data.__dict__["id"]] = info
+            for info in self.__session.query(eval(cls)):
+                queriesDict[info.__dict__["id"]] = info
         return queriesDict
 
     def new(self, obj):
