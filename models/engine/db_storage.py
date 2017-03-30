@@ -8,10 +8,10 @@ from models.place import Place
 from models.review import Review
 from models.state import State
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, scoped_session
 
 
-class DBstorage:
+class DBStorage:
     __engine = None
     __session = None
 
@@ -35,19 +35,19 @@ class DBstorage:
                 for info in self.__session.query(i):
                     queriesDict[data.__dict__["id"]] = info
         else:
-            for info in self.__session(cls):
+            for info in self.__session(eval(cls)):
                 queriesDict[data.__dict__["id"]] = info
         return queriesDict
 
     def new(self, obj):
-        if !obj:
-            self.__session(obj)
+        if obj is not None:
+            self.__session.add(obj)
 
     def save(self):
         self.__session.commit()
 
     def delete(self, obj=None):
-        if !obj:
+        if obj is not None:
             self.__session.delete(obj)
 
     def reload(self):
@@ -55,4 +55,4 @@ class DBstorage:
         self.__session = scoped_session(sessionmaker(bind=self.__engine))
 
     def close(self):
-        self.remove(self.__session)
+        self.__session.remove()

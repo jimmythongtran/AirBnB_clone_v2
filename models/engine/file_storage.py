@@ -17,8 +17,16 @@ class FileStorage:
     def __init__(self):
         self.reload()
 
-    def all(self):
-        return FileStorage.__objects
+    def all(self, cls=None):
+        if cls is None:
+            return FileStorage.__objects
+        else:
+            myDictionary = {}
+            for k, v in self.__objects.items():
+                if v.__class__.__name__ == cls:
+                    myDictionary[k] = v
+            return myDictionary
+
 
     def new(self, obj):
         if obj is not None:
