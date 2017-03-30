@@ -27,7 +27,6 @@ class FileStorage:
                     myDictionary[k] = v
             return myDictionary
 
-
     def new(self, obj):
         if obj is not None:
             FileStorage.__objects[obj.id] = obj
